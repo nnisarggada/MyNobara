@@ -119,6 +119,10 @@ return packer.startup(function(use)
   -- indent line
   use "lukas-reineke/indent-blankline.nvim"
 
+  use {
+    "Exafunction/codeium.vim",
+  }
+
   if packer_bootstrap then
     require("packer").sync()
   end
