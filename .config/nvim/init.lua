@@ -14,6 +14,6 @@ require("nnisarggada.plugins.lsp.null-ls")
 require("nnisarggada.plugins.autopairs")
 require("nnisarggada.plugins.treesitter")
 require("nnisarggada.plugins.gitsigns")
-require("nnisarggada.plugins.alpha")
+require("nnisarggada.plugins.flutter")
 
 vim.cmd([[hi NvimTreeNormal guibg=NONE ctermbg=NONE]])

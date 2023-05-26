@@ -108,19 +108,28 @@ return packer.startup(function(use)
   use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
 
   -- transparency
-  use("xiyaowong/nvim-transparent")
+  use "xiyaowong/nvim-transparent"
 
   -- colorizer
-  use("chrisbra/Colorizer")
+  use "chrisbra/Colorizer"
 
   -- formatter
-  use("mhartington/formatter.nvim")
+  use "mhartington/formatter.nvim"
 
   -- indent line
-  use("lukas-reineke/indent-blankline.nvim")
+  use "lukas-reineke/indent-blankline.nvim"
 
   -- codeium
-  use("Exafunction/codeium.vim")
+  use "Exafunction/codeium.vim"
+
+  -- flutter tools
+  use({
+    "akinsho/flutter-tools.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "stevearc/dressing.nvim", -- optional for vim.ui.select
+    },
+  })
 
   if packer_bootstrap then
     require("packer").sync()
