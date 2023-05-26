@@ -116,6 +116,9 @@ return packer.startup(function(use)
   -- formatter
   use "mhartington/formatter.nvim"
 
+  -- indent line
+  use "lukas-reineke/indent-blankline.nvim"
+
   if packer_bootstrap then
     require("packer").sync()
   end
