@@ -119,6 +119,7 @@ return packer.startup(function(use)
   -- indent line
   use "lukas-reineke/indent-blankline.nvim"
 
+  -- codeium
   use {
     "Exafunction/codeium.vim",
   }
