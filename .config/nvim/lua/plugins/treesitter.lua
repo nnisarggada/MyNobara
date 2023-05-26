@@ -1,100 +1,54 @@
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {
-    "tsx",
-    "typescript",
-    "javascript",
-    "html",
-    "css",
-    "vue",
-    "astro",
-    "svelte",
-    "gitcommit",
-    "graphql",
-    "json",
-    "json5",
-    "lua",
-    "markdown",
-    "prisma",
-  },          -- one of "all", or a list of languages
-  sync_install = false,           -- install languages synchronously (only applied to `ensure_installed`)
-  ignore_install = { "haskell" }, -- list of parsers to ignore installing
-  highlight = {
-    enable = true,
-    -- disable = { "c", "rust" },  -- list of language that will be disabled
-    -- additional_vim_regex_highlighting = false,
+return {
+  "nvim-treesitter/nvim-treesitter",
+  module = true,
+  event = { "BufReadPost", "BufNewFile" },
+  cmd = {
+    "TSInstall",
+    "TSInstallInfo",
+    "TSUpdate",
+    "TSBufEnable",
+    "TSBufDisable",
+    "TSEnable",
+    "TSDisable",
+    "TSModuleInfo",
   },
+  dependencies = {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    {
+      "lukas-reineke/indent-blankline.nvim",
+      config = function()
+        local indent_blankline = require "indent_blankline"
 
-  incremental_selection = {
-    enable = false,
-    keymaps = {
-      init_selection    = "<leader>gnn",
-      node_incremental  = "<leader>gnr",
-      scope_incremental = "<leader>gne",
-      node_decremental  = "<leader>gnt",
+        indent_blankline.setup {
+          show_current_context = true,
+          indent_blankline_char = "▏",
+          indent_blankline_show_trailing_blankline_indent = false,
+          indent_blankline_show_first_indent_level = true,
+          indent_blankline_use_treesitter = true,
+          indent_blankline_show_current_context = true,
+          indent_blankline_buftype_exclude = { "terminal", "nofile" },
+          indent_blankline_filetype_exclude = {
+            "help",
+            "NvimTree",
+          },
+        }
+      end,
     },
   },
+  -- build = ":TSUpdate",
+  config = function()
+    local configs = require "nvim-treesitter.configs"
 
-  indent = {
-    enable = true
-  },
-
-  rainbow = {
-    enable = true,
-    extended_mode = true,
- },
-
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
-  },
-
-  textobjects = {
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        ["]]"] = "@function.outer",
-        ["]m"] = "@class.outer",
+    configs.setup {
+      ensure_installed = { "cpp", "lua", "c", "go", "python", "java" }, -- one of "all" or a list of languages
+      highlight = {
+        enable = true, -- false will disable the whole extension
+        disable = { "css" }, -- list of language that will be disabled
       },
-      goto_next_end = {
-        ["]["] = "@function.outer",
-        ["]M"] = "@class.outer",
+      autopairs = {
+        enable = true,
       },
-      goto_previous_start = {
-        ["[["] = "@function.outer",
-        ["[m"] = "@class.outer",
-      },
-      goto_previous_end = {
-        ["[]"] = "@function.outer",
-        ["[M"] = "@class.outer",
-      },
-    },
-    select = {
-      enable = true,
-
-      -- Automatically jump forward to textobj, similar to targets.vim
-      lookahead = true,
-
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = {
-        ["~"] = "@parameter.inner",
-      },
-    },
-  },
-
-  textsubjects = {
-    enable = true,
-    keymaps = {
-      ['<cr>'] = 'textsubjects-smart', -- works in visual mode
+      indent = { enable = false, disable = {} },
     }
-  },
+  end,
 }
