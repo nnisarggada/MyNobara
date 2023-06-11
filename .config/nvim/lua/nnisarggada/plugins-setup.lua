@@ -129,6 +129,14 @@ return packer.startup(function(use)
       "nvim-lua/plenary.nvim",
       "stevearc/dressing.nvim", -- optional for vim.ui.select
     },
+
+    -- highlight undo
+    use({
+      "tzachar/highlight-undo.nvim",
+      config = function()
+        require("highlight-undo").setup()
+      end,
+    }),
   })
 
   if packer_bootstrap then
